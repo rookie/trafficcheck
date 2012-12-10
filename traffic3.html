@@ -7,6 +7,13 @@
     <link href="stylesheets/trafficdefault.css" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
+      function supportsLocalStorage() {
+        try {
+          return 'localStorage' in window && window['localStorage'] !== null;
+        } catch (e) {
+          return false;
+        }
+      }
       function initialize() {
         var myLatlng = new google.maps.LatLng(34.04924594193164, -118.24104309082031);
         var mapOptions = {
@@ -19,6 +26,21 @@
 
         var trafficLayer = new google.maps.TrafficLayer();
         trafficLayer.setMap(map);
+      }
+      function loadLocation() {
+        if (localStorage.lat && localStorage.lng && localStorage.zoom)
+        {
+          var savedLatLng = new google.maps.LatLng(localStorage.lat, localStorage.lng);
+          map.setCenter(savedLatLng);
+          map.setZoom(localStorage.zoom);
+        } else {
+          return false;
+        }        
+      }
+      function saveLocation() {
+        localStorage.lat=map.getCenter().lat();
+        localStorage.lng=map.getCenter().lng();
+        localStorage.zoom=map.getZoom();
       }
     </script>
   </head>
