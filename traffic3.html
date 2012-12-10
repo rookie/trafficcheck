@@ -34,7 +34,7 @@
         {
           var savedLatLng = new google.maps.LatLng(localStorage.lat, localStorage.lng);
           map.setCenter(savedLatLng);
-          map.setZoom(localStorage.zoom);
+          map.setZoom(parseInt(localStorage.zoom));
         } else {
           return false;
         }        
