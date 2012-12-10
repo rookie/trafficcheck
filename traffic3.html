@@ -26,6 +26,13 @@
 
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
+        //http://stackoverflow.com/questions/4338490/google-map-event-bounds-changed-triggered-multiple-times-when-dragging
+        google.maps.event.addListener(map, 'idle', function() {
+          //console.log('idle');
+          saveLocation();
+        });
+
+
         var trafficLayer = new google.maps.TrafficLayer();
         trafficLayer.setMap(map);
         loadLocation();
@@ -47,20 +54,23 @@
         localStorage.zoom=map.getZoom();
       }
       function addListeners() {
-        google.maps.event.addListner(map, 'bounds_changed', function() {
+        
+        google.maps.event.addListener(map, 'bounds_changed', function() {
           //If you're trying to detect a change in the viewport, be sure to use the
           //specific bounds_changed event rather than constituent zoom_changed and center_changed events.
           console.log('bounds_changed');
         });
-        google.maps.event.addListner(map, 'center_changed', function() {
+        google.maps.event.addListener(map, 'center_changed', function() {
           console.log('center_changed');
         });
-        google.maps.event.addListner(map, 'zoom_changed', function() {
+        google.maps.event.addListener(map, 'zoom_changed', function() {
           console.log('zoom_changed');
         });
-        google.maps.event.addListner(map, 'idle', function() {
+        
+        google.maps.event.addListener(map, 'idle', function() {
 //http://stackoverflow.com/questions/4338490/google-map-event-bounds-changed-triggered-multiple-times-when-dragging
-          console.log('idle');
+          //console.log('idle');
+          saveLocation();
         });
         
       }
