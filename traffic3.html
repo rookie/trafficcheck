@@ -67,6 +67,9 @@
         console.log('Saved')
         printLoc();
       }
+      window.onresize = function(event) {
+        console.log('resize')
+      }
       function addListeners() {
         
         google.maps.event.addListener(map, 'bounds_changed', function() {
@@ -83,7 +86,7 @@
         
         google.maps.event.addListener(map, 'idle', function() {
 //http://stackoverflow.com/questions/4338490/google-map-event-bounds-changed-triggered-multiple-times-when-dragging
-          //console.log('idle');
+          console.log('idle');
           saveLocation();
         });
         
