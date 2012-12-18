@@ -42,12 +42,19 @@
         trafficLayer.setMap(map);
         loadLocation();
       }
+      function printLoc() {
+        console.log(map.getCenter().lat());
+        console.log(map.getCenter().lng());
+        console.log(map.getZoom()); 
+      }
       function loadLocation() {
         if (localStorage.lat && localStorage.lng && localStorage.zoom)
         {
           var savedLatLng = new google.maps.LatLng(localStorage.lat, localStorage.lng);
           map.setCenter(savedLatLng);
           map.setZoom(parseInt(localStorage.zoom));
+          console.log('Loaded')
+          printLoc();
         } else {
           return false;
         }        
@@ -57,6 +64,8 @@
         localStorage.lat=map.getCenter().lat();
         localStorage.lng=map.getCenter().lng();
         localStorage.zoom=map.getZoom();
+        console.log('Saved')
+        printLoc();
       }
       function addListeners() {
         
