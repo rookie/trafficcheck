@@ -13,6 +13,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
     <script>
       var map;
+      var marker = null;
       
       function initialize() {
         var myLatlng = new google.maps.LatLng(34.04924594193164, -118.24104309082031);
@@ -27,6 +28,18 @@
 
         var trafficLayer = new google.maps.TrafficLayer();
         trafficLayer.setMap(map);
+        
+        //add listener to create marker
+        google.maps.event.addListener(map, 'click', function(event) {
+
+            //delete the old marker
+            if (marker) { marker.setMap(null); }
+
+            //create the new marker
+             marker = new google.maps.Marker({ position: event.latLng, map: map});
+
+        });
+
       }
     </script>
   </head>
