@@ -25,7 +25,16 @@
       }
       
       function centermarkers() {
-        console.log('nope');
+        var bounds = new google.maps.LatLngBounds();
+        
+        
+        var latlng = new google.maps.LatLng(homemarker.lat, homemarker.lng);
+        bounds.extend(latlng);
+        latlng = new google.maps.LatLng(workmarker.lat, workmarker.lng);
+        bounds.extend(latlng);
+        
+        map.fitBounds(bounds);
+
       }
       
       function initialize() {
