@@ -13,6 +13,20 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
     <script>
       var map;
+      var home = new google.maps.LatLng(33.686781909738976, -117.88553237915039);
+      var work = new google.maps.LatLng(33.68821026146479, -117.83145904541016);
+      
+      var homemarker = null;
+      var workmarker = null;
+      
+      function setmarkers() {
+        homemarker = new google.maps.Marker({ position: home, map: map});
+        workmarker = new google.maps.Marker({ position: work, map: map});
+      }
+      
+      function centermarkers() {
+        console.log('nope');
+      }
       
       function initialize() {
         var myLatlng = new google.maps.LatLng(34.04924594193164, -118.24104309082031);
@@ -23,6 +37,7 @@
         }
 
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
 
 
         var trafficLayer = new google.maps.TrafficLayer();
