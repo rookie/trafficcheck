@@ -13,6 +13,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
     <script>
       var map;
+      var positionMarker = null;
       
       function initialize() {
         var myLatlng = new google.maps.LatLng(34.04924594193164, -118.24104309082031);
@@ -34,6 +35,7 @@
           navigator.geolocation.getCurrentPosition(function(position) {
             initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
             map.setCenter(initialLocation);
+            positionMarker = new google.maps.Marker({ position: initialLocation, map: map});
           }, function() {
             
           });
