@@ -28,10 +28,8 @@
         var bounds = new google.maps.LatLngBounds();
         
         
-        var latlng = new google.maps.LatLng(homemarker.position.lat, homemarker.position.lng);
-        bounds.extend(latlng);
-        latlng = new google.maps.LatLng(workmarker.position.lat, workmarker.position.lng);
-        bounds.extend(latlng);
+        bounds.extend(homemarker.position);
+        bounds.extend(workmarker.position);
         
         map.fitBounds(bounds);
 
