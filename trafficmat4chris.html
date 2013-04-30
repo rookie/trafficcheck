@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon-precomposed" href="apple-icon.png">
+    <link rel="apple-touch-startup-image" href="apple-startup-image.png">
+    
+    <title>trafficmat1: google maps with traffic</title>
+    <link href="stylesheets/trafficdefault.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
+    <script>
+      var map;
+      var home = new google.maps.LatLng(33.686781909738976, -117.88553237915039);
+      var work = new google.maps.LatLng(33.68821026146479, -117.83145904541016);
+      
+      var homemarker = null;
+      var workmarker = null;
+      
+      function setmarkers() {
+        homemarker = new google.maps.Marker({ position: home, map: map});
+        workmarker = new google.maps.Marker({ position: work, map: map});
+      }
+      
+      function centermarkers() {
+        var bounds = new google.maps.LatLngBounds();
+        
+        
+        bounds.extend(homemarker.position);
+        bounds.extend(workmarker.position);
+        
+        map.fitBounds(bounds);
+
+      }
+      
+      function initialize() {
+        var myLatlng = new google.maps.LatLng(34.04924594193164, -118.24104309082031);
+        var mapOptions = {
+          zoom: 13,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        setmarkers();
+        centermarkers();
+
+        var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas"></div>
+  </body>
+</html>
